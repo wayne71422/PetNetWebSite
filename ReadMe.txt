@@ -7,7 +7,7 @@
 		add ManangerProfilesDto
 	add Success.cshtml(³Æ¥Î)
 
-[working on] Add BookDateRecordVM, BookDateRecordDto classes
+[V] Add BookDateRecordVM, BookDateRecordDto classes
 	add  ManagerIncomeDetailsRepository, BillDetailsRepository
 	Modify BookDateService, BookDateService classes
 	Modify BookDateController
