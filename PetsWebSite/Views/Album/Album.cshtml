@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PetsWebSite.Models.ViewModels.AlbumVm>
+
+@{
+    ViewBag.Title = "Album";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/PhotoAlbum.css" rel="stylesheet" type="text/css" />
+}
+
+<h1>我的圖片相簿</h1>
+<div class="gallery" id="gallery">
+    @foreach (var photo in Model)
+    {
+        <img src="@Url.Content("~/Uploads/Diaries/" + photo.PhotoName)" />
+    }
+</div>
+

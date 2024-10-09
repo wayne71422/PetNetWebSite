@@ -1,0 +1,204 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.banner {
+  background-image: url("/img/bgc.png");
+  background-size: cover; /* 圖片覆蓋整個區域 */
+  background-position: center; /* 圖片置中 */
+  background-repeat: no-repeat; /* 防止圖片重複 */
+  height: 150px; /* 可以根據需要調整高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: white; */
+}
+.banner-content {
+  display: flex;
+  justify-content: space-between; /* 將內容平均分佈，圖片分布在兩邊，文字在中間 */
+  align-items: center;
+  width: 100%; /* 讓 header 內容佔滿整個寬度 */
+  padding: 0 20px; /* 讓內容不直接貼邊 */
+}
+
+.banner h1 {
+  color: #ff877d;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+}
+.left-banner-img {
+  width: 100px; /* 根據需要調整圖片大小 */
+  height: auto;
+  /* 調整圖片和文字之間的距離 */
+}
+body {
+  background-color: #ffcccc !important;
+  color: #653d2e !important;
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+.container1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 80px;
+}
+
+.left {
+  flex: 1;
+  margin-right: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table thead {
+  background-color: #aa97ff;
+  color: #653d2e;
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+}
+
+table th,
+table td {
+  padding: 15px;
+  text-align: left;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #555;
+  background-color: #ffe4e1;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+.right {
+  flex: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #999;
+}
+.right-panel {
+  flex: 0.5;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 水平置中 */
+  text-align: center;
+  height: 200;
+}
+#infoBox {
+  text-align: center;
+  font-size: 1.2em;
+  padding: 20px; /* 增加內部間距讓內容看起來更整潔 */
+}
+
+button {
+  margin-top: 10px;
+  width: 100%;
+  height: 45px;
+  background-color: red;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  color: black;
+  font-weight: 500;
+}
+h3 {
+  font-size: 1.3em;
+  text-align: left;
+  margin-bottom: 10px;
+}
+p {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.navbar {
+  background: linear-gradient(to right, #f06292, #c678dd);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.nav-item {
+  margin: 0 20px; /* 增加左右各 10px 的間距 */
+}
+
+/* 使用 flexbox */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* 元素間均分空間 */
+}
+
+.section-title {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.gradient-background {
+  background: linear-gradient(to right, #cf82ff, #6dbbff);
+}
+
+.navbar {
+  padding: 15px 0;
+}
+
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand {
+  color: #333;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-brand:hover {
+  color: #0056b3;
+}
+
+footer {
+  color: #333;
+}
+
+footer a {
+  color: #0056b3;
+}
+
+footer a:hover {
+  color: #003d82;
+  text-decoration: none;
+}
+
+/* 如果需要調整按鈕顏色以配合新背景 */
+.btn-outline-primary {
+  color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}

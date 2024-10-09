@@ -1,0 +1,107 @@
+﻿@model IEnumerable<PetsWebSite.Models.ViewModels.BookDateRecordVm>
+
+@{
+    ViewData["Title"] = "BookCheck";
+}
+@section styles{
+    <!-- Custom styles for this page -->
+
+    
+    <link href="~/css/Bookpage.css" rel="stylesheet">
+}
+
+<main class="flex-shrink-0">
+    <div class="container py-5">
+        <div class="table-container" >
+            <h2>預約紀錄</h2>
+            <h3>您的預約資料</h3>
+            <p>
+                <a href="@Url.Action("Book", "BookDate")" class="btn btn-primary">新增預約</a>
+            </p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>寵物名稱</th>
+                        <th>諮詢醫生</th>
+                        <th>建立日期</th>
+                        <th>預約日期</th>
+                        <th>目前狀態</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr @*v-for="appointment in sortedAppointments" :key="appointment.id"*@>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PetName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DoctorName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookTime)
+                            </td>
+
+                            <td>
+                                @if (item.IsStart == 1)
+                                {
+                                    <!-- 添加 form 表單 -->
+                                    <form method="post" action="@Url.Action("BookCheck", "BookDate")">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-sm btn-success">開始諮詢</button>
+                                    </form>
+                                }
+                                else if (item.IsStart == 2)
+                                {
+                                    <!-- 添加 form 表單 -->
+                                    <form method="post" action="@Url.Action("BookCheck", "BookDate")">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-sm btn-success">正在諮詢中</button>
+                                    </form>
+                                }
+                                else if (item.IsStart == 0)
+                                {
+                                    <!-- 添加 form 表單 -->
+                                    <form method="post" action="@Url.Action("BookCancle", "BookDate")" onsubmit="return confirm('確定要取消嗎？');">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button class="btn btn-sm btn-dark">尚未開始(可取消)</button>
+                                    </form>
+                                }
+                                else if (item.IsStart == 4)
+                                {
+                                    <!-- 添加 form 表單 -->
+                                    <form>
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button class="btn btn-sm btn-warning">逾時已結束</button>
+                                    </form>
+                                }
+                                else if(item.IsStart == 5)
+                                {
+                                    <!-- 添加 form 表單 -->
+                                    <form>
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button class="btn btn-sm btn-outline-danger">已取消預約</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <!-- 添加 form 表單 -->
+                                    <form>
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button class="btn btn-sm btn-outline-danger">已結束</button>
+                                    </form>
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+

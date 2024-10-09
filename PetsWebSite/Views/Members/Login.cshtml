@@ -1,0 +1,57 @@
+﻿@model PetsWebSite.Models.ViewModels.LoginVm
+
+@{
+    ViewBag.Title = "使用者登入";
+}
+
+
+<main class="container-md">
+    <div class="wrapper">
+        <form asp-action="Login" method="post">
+            @Html.AntiForgeryToken()
+
+            <h2>使用者登入</h2>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <p>@error.ErrorMessage</p>
+                    }
+                </div>
+            }
+
+            <div class="input-box">
+                <input type="text" name="email" value="@(Request.Cookies["RememberMeEmail"] != null ? Request.Cookies["RememberMeEmail"].Value : "")" required>
+                <label>電子信箱&帳號</label>
+            </div>
+
+            <div class="input-box">
+                <input type="password" name="password" value="@(Request.Cookies["RememberMePassword"] != null ? Request.Cookies["RememberMePassword"].Value : "")" required>
+                <label>密碼</label>
+            </div>
+
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox" name="RememberMe" value="true" @(Model.RememberMe ? "checked" : "")> 記住帳號&密碼
+                    <a href="@Url.Action("ForgotPassword", "Members")">忘記密碼?</a>
+                </label>
+            </div>
+
+            <button type="submit">登入</button>
+
+            <div class="register-link">
+                <p>還沒有帳號? <a href="@Url.Action("Register", "Members")">點我註冊</a></p>
+            </div>
+        </form>
+    </div>
+</main>
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

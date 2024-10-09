@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>貓狗有佳毛孩日記</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/stylesWayne.css" rel="stylesheet" />
+    <link href="css/diary.css" rel="stylesheet" />
+    
+    <link href="css/petList.css" rel="stylesheet" />
+    <!--link href="/css/Login.css" rel="stylesheet" /-->
+
+    <!-- 添加 Bootstrap 圖標 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
+    <script src="./JS/petList.js"></script>
+    <script src="./JS/utility.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <div class="banner">
+          <img src="img/13.png" alt="" class="left-banner-img" />
+          <h1 class="text-center">貓狗有佳毛孩日記</h1>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light gradient-background">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="初始首頁.html">貓狗有佳毛孩日記</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="初始首頁.html">首頁</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">個人中心</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">預約諮詢</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">儲值相關</a>
+                </li>
+              </ul>
+
+              <div class="navbar-nav">
+                <a
+                  class="nav-link btn btn-outline-primary me-2"
+                  href="Login.html"
+                  >登入</a
+                >
+                <span class="navbar-text mx-2">|</span>
+                <a class="nav-link btn btn-outline-primary" href="signup.html"
+                  >註冊</a
+                >
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main class="mb-5">
+        <button id="new-btn" data-bs-toggle="modal" data-bs-target="#newPetModal">新增</button>
+        <div class="pet-list">
+          <div class="container-md">
+            <div class="row align-items-center">
+                <div class="col-md-5">
+                    <img src="./img/footprint.png" class="img-fluid" />
+                </div>
+                <div class="col-md-7">
+                    <table class="text-center">
+                        <tbody>
+                          <tr>
+                            <th scope="row">寵物名</th>
+                            <td>阿咪</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">生日</th>
+                            <td>2018-08-10</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">種類</th>
+                            <td>貓</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">品種</th>
+                            <td>米克斯</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">性別</th>
+                            <td>公</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">結紮</th>
+                            <td>是</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">體重(公斤)</th>
+                            <td>5</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    <div class="btns">
+                        <button onclick="changePage('editPage')">編輯</button>
+                        <a id="editPage" href="Edit.html" style="display: none;"></a>
+                        <button onclick="changePage('diaryPage')">活動日記</button>
+                        <a id="diaryPage" href="Diary.html" style="display: none;"></a>
+                        <button onclick="changePage('bookPage')">預約諮詢</button>
+                        <a id="bookPage" href="預約頁面.html" style="display: none;"></a>
+                    </div>
+                </div>
+            </div>
+          </div>    
+        </div>
+      </main>
+      <div
+        class="modal fade"
+        id="newPetModal"
+        tabindex="-1"
+        aria-labelledby="newPetModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newPetModalLabel">新增寵物</h5>
+              <button
+                type="button"
+                class="btn-close"
+                id="closeModalBtn"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="newPetForm">
+                <div class="mb-3">
+                  <label for="newPetName" class="form-label">寵物名</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newPetName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="newBday" class="form-label">生日</label>
+                  <input type="date" id="newBday" class="form-control" />
+                </div>
+                <div class="mb-3">
+                  <label for="newType" class="form-label">種類</label>
+                  <select name="newType" id="newType" class="form-select" onchange="onTypeChange()" required>
+                    <option value=""></option>
+                    <option value="cat">貓</option>
+                    <option value="dog">狗</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="newSpecies" class="form-label">品種</label>
+                  <select name="newSpecies" id="newSpecies" class="form-select"></select>
+                </div>
+                <div class="mb-3">
+                  <label for="newGender" class="form-label">性別</label>
+                  <select name="newGender" id="newGender" class="form-select" required>
+                    <option value=""></option>
+                    <option value="M">公</option>
+                    <option value="F">母</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="newLigation" class="form-label">結紮</label>
+                  <select name="newLigation" id="newLigation" class="form-select" required>
+                    <option value=""></option>
+                    <option value="Y">是</option>
+                    <option value="N">否</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="newWeight" class="form-label">體重</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newWeight"
+                    required
+                  />
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                取消
+              </button>
+              <button type="button" class="btn btn-primary" id="saveBtn">
+                保存
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <footer class="footer mt-auto py-3 gradient-background text-light">
+      <div class="container">
+        <footer-content></footer-content>
+        <hr />
+        <p class="text-center mb-0">
+          &copy; 2023 貓狗有佳毛孩日記. 版權所有.
+        </p>
+      </div>
+    </footer>
+    </div>
+
+    
+
+    
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref, computed, onMounted } = Vue;
+
+      const FooterContent = {
+        template: `
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>關於我們</h5>
+                    <p>{{ aboutUs }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>聯絡資訊</h5>
+                    <p>電話：{{ contactInfo.phone }}<br>
+                    電子郵件：{{ contactInfo.email }}<br>
+                    地址：{{ contactInfo.address }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>關注我們</h5>
+                    <a v-for="(link, index) in socialLinks" :key="index" :href="link.url" class="text-light me-2">{{ link.name }}</a>
+                </div>
+            </div>
+        `,
+        setup() {
+          const aboutUs = ref(
+            "貓狗有佳毛孩日記致力於為您的寵物提供最優質的服務。"
+          );
+          const contactInfo = ref({
+            phone: "(02) 1234-5678",
+            email: "info@petdiary.com",
+            address: "台北市寵物大道123號",
+          });
+          const socialLinks = ref([
+            { name: "Facebook", url: "#" },
+            { name: "Instagram", url: "#" },
+            { name: "Twitter", url: "#" },
+          ]);
+
+          return {
+            aboutUs,
+            contactInfo,
+            socialLinks,
+          };
+        },
+      };
+
+      const app = createApp({
+        components: {
+          "footer-content": FooterContent,
+        },
+        setup() {
+          // 這裡可以添加通用的邏輯
+
+          return {
+            // 返回通用的數據
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

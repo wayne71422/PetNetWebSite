@@ -1,0 +1,120 @@
+﻿@model IEnumerable<PetWebBackSite.Models.ViewModels.CheckBookingRecrodVm>
+
+@{
+    ViewBag.Title = "BookingRecordList";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">預約諮詢清單</h1>
+    <p class="mb-4">
+        用於檢視預約者資料與預約時間的明細列表
+        <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.
+    </p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">諮詢清單</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                客戶
+                            </th>
+                            <th>
+                                寵物
+                            </th>
+                            <th>
+                                預約時間
+                            </th>
+                            <th>
+                                預約狀態
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>客戶</th>
+                            <th>寵物</th>
+                            <th>預約時間</th>
+                            <th>預約狀態</th>
+                        </tr>
+                    </tfoot>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MemberName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PetName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsStartStr)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section styles{
+    <!-- Custom styles for this page -->
+    <link href="~/Scripts/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+}
+
+@section scripts{
+    <!-- Page level plugins -->
+    <script src="~/Scripts/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Scripts/js/demo/datatables-demo.js"></script>
+}
+
+@*<table class="table">
+        <tr>
+            <th>
+                客戶
+            </th>
+            <th>
+                寵物
+            </th>
+            <th>
+                預約時間
+            </th>
+            <th>
+                預約狀態
+            </th>
+
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsStartStr)
+            </td>
+        </tr>
+    }
+
+    </table>*@

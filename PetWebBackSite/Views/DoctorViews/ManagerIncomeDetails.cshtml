@@ -1,0 +1,227 @@
+﻿@model PetWebBackSite.Models.ViewModels.ManagerIncomeVm
+
+@{
+    ViewBag.Title = "ManagerIncomeDetails";
+    decimal totalPureIncomeAmount = Model.ManagerIncomeDetails.Where(x => x.IsEnd == true).Sum(x => x.IncomeAmount);
+    decimal totalIncomeAmount = Model.ManagerIncomeDetails.Sum(x => x.IncomeAmount);
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">預約諮詢清單</h1>
+    <p class="mb-4">
+        用於檢視預約者資料與預約時間的明細列表
+        <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.
+    </p>
+    <table>
+        <tr>
+            <td>期間內已進帳收入：</td>
+            <td class="font-weight-bold">
+                @totalPureIncomeAmount
+            </td>
+            
+            <td>
+                期間內總收入(含未入帳)：
+            </td>
+            <td class="font-weight-bold">
+                @totalIncomeAmount
+            </td>
+        </tr>
+    </table>
+        @using (Html.BeginForm("ManagerIncomeDetails", "DoctorViews", FormMethod.Post))
+        {
+            <div>
+                <label>選擇起始年份:</label>
+                @Html.TextBoxFor(model => model.SelectYear, new { @placeholder = "請輸入想顯示的年份" })
+            </div>
+            <div>
+                <label>選擇起始月份:</label>
+                @Html.TextBoxFor(model => model.SelectMonth, new { @placeholder = "請輸入想顯示的月份" })
+            </div>
+            <div>
+                <label>選擇時間跨度(天):</label>
+                @Html.TextBoxFor(model => model.SelecteTimeSpan, new { @placeholder = "請輸入想顯示的期間天數" })
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-sm btn-primary">篩選</button>
+            </div>
+            
+        }
+    
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">收入清單</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                諮詢會員
+                            </th>
+                            <th>
+                                本次諮詢收入
+                            </th>
+                            <th>
+                                結束諮詢時間
+                            </th>
+                            <th>
+                                是否完成諮詢
+                            </th>
+                            <th>
+                                諮詢狀態
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                諮詢會員
+                            </th>
+                            <th>
+                                本次諮詢收入
+                            </th>
+                            <th>
+                                結束諮詢時間
+                            </th>
+                            <th>
+                                是否完成諮詢
+                            </th>
+                            <th>
+                                諮詢狀態
+                            </th>
+                        </tr>
+                    </tfoot>
+                    @foreach (var item in Model.ManagerIncomeDetails)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MemberName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IncomeAmount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SettlementDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsEndStr)
+                            </td>
+                            <td>
+                                @if (item.IsEnd == false)
+                                {
+                                    @Html.ActionLink("確認結束諮詢並入帳", "ChangeEndState", new { id = item.Id }, new { @class = "btn btn-sm btn-success" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("已結束已入賬", "ManagerIncomeDetails", new { id = item.Id })
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section styles{
+    <!-- Custom styles for this page -->
+    <link href="~/Scripts/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+}
+
+@section scripts{
+    <!-- Page level plugins -->
+    <script src="~/Scripts/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Scripts/js/demo/datatables-demo.js"></script>
+}
+
+
+@*<h2>使用者收入清單</h2>
+
+<tr>
+    <td>期間內已進帳收入</td>
+    <td>
+        @totalPureIncomeAmount
+    </td>
+    <td>
+        期間內總收入(含未入帳)
+    </td>
+    <td>
+        @totalIncomeAmount
+    </td>
+</tr>
+
+@using (Html.BeginForm("ManagerIncomeDetails", "DoctorViews", FormMethod.Post))
+{
+    <div>
+        <label>選擇年份:</label>
+        @Html.TextBoxFor(model => model.SelectYear, new { @placeholder = "請輸入想顯示的年份" })
+    </div>
+    <div>
+        <label>選擇月份:</label>
+        @Html.TextBoxFor(model => model.SelectMonth, new { @placeholder = "請輸入想顯示的月份" })
+    </div>
+    <div>
+        <label>選擇時間跨度:</label>
+        @Html.TextBoxFor(model => model.SelecteTimeSpan, new { @placeholder = "請輸入想顯示的期間天數" })
+    </div>
+    <button type="submit">篩選</button>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            諮詢會員
+        </th>
+        <th>
+            本次諮詢收入
+        </th>
+        <th>
+            結束諮詢時間
+        </th>
+        <th>
+            是否完成諮詢
+        </th>
+        <th>
+            諮詢狀態
+        </th>
+    </tr>
+
+    @foreach (var item in Model.ManagerIncomeDetails)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncomeAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettlementDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsEndStr)
+            </td>
+            <td>
+                @if (item.IsEnd == false)
+                {
+                    @Html.ActionLink("確認結束諮詢並入帳", "ChangeEndState", new { id = item.Id }, new { @class = "btn btn-sm btn-success" })
+                }
+                else
+                {
+                    @Html.ActionLink("已結束已入賬", "ManagerIncomeDetails", new { id = item.Id })
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>*@

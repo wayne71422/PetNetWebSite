@@ -1,0 +1,87 @@
+﻿@model IEnumerable<PetsWebSite.Models.ViewModels.PetListVm>
+
+@{
+    ViewBag.Title = "PetList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <link href="~/css/petList.css" rel="stylesheet" />
+    
+    <style>
+        .btn-secondary {
+            background-color: transparent;
+            border: none;
+            color: #333;
+        }
+
+            .btn-secondary:hover {
+                background-color: transparent;
+            }
+    </style>
+}
+
+<div class="container">
+    
+    <div>
+        <a href="@Url.Action("CreatePet", "PetList")" class="btn btn-primary">新增</a>
+
+        <div class="pet-list">
+
+            @foreach (var pet in Model)
+            {
+                <div class="container-md">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <img src="@Url.Content("~/Uploads/Pets/" + pet.Photo)" class="img-fluid" />
+                        </div>
+                        <div class="col-md-7">
+                            <table class="text-center">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">寵物名</th>
+                                        <td>@Html.DisplayFor(p => pet.Name)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">生日</th>
+                                        <td>@Html.DisplayFor(p => pet.Birthday)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">種類</th>
+                                        <td>@Html.DisplayFor(p => pet.Species)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">品種</th>
+                                        <td>@Html.DisplayFor(p => pet.Breed)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">性別</th>
+                                        <td>@Html.DisplayFor(p => pet.Gender)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">結紮</th>
+                                        <td>@Html.DisplayFor(p => pet.Neutered)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">體重(公斤)</th>
+                                        <td>@Html.DisplayFor(p => pet.Weight)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="btns">
+                                <a href="@Url.Action("EditPet", "PetList", new {petId = pet.Id})" class="btn btn-primary">編輯</a>
+                                <a href="@Url.Action("Diary", "PetList", new {petId = pet.Id})" class="btn btn-primary">活動日記</a>
+                                <a href="@Url.Action("Book", "BookDate")" class="btn btn-primary">預約諮詢</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/petList.js"></script>
+}

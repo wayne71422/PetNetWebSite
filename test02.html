@@ -1,0 +1,77 @@
+<div class="mt-4" id="uploadPhotoContainer">
+    <label for="newPhoto" class="form-label">上傳照片</label>
+    <button type="button" id="addPhotoBtn" onclick="addPhoto()">
+        +
+    </button>
+</div>
+
+<script>
+    function addPhoto() {
+        // 創建外部的 div 容器
+        const photoDiv = document.createElement('div');
+        photoDiv.classList.add('photo-upload');
+
+        // 創建上傳照片的 input 元素
+        const inputFile = document.createElement('input');
+        inputFile.type = 'file';
+        inputFile.className = 'form-control photos';
+        inputFile.accept = 'image/*';
+
+        // 創建選擇寵物的容器
+        const tagsContainer = document.createElement('div');
+        tagsContainer.className = 'container mt-3';
+        
+        // 創建標籤
+        const labelTags = document.createElement('label');
+        labelTags.setAttribute('for', 'tags');
+        labelTags.innerText = '選擇照片中有的寵物';
+        tagsContainer.appendChild(labelTags);
+        
+        // 創建可選擇的標籤
+        const tagsDiv = document.createElement('div');
+        tagsDiv.id = 'tags';
+        tagsDiv.className = 'border p-2 tags-background';
+
+        const options = ['aa', 'bb', 'cc', 'dd', 'ee'];
+        options.forEach(option => {
+            const tag = document.createElement('div');
+            tag.className = 'selectable-option';
+            tag.setAttribute('data-value', option);
+            tag.innerText = option;
+            tag.onclick = toggleOption; // 確保 toggleOption 函數已定義
+            tagsDiv.appendChild(tag);
+        });
+        
+        tagsContainer.appendChild(tagsDiv);
+
+        // 已選擇的標籤輸入框
+        const selectedTagsDiv = document.createElement('div');
+        selectedTagsDiv.className = 'mt-3';
+        const labelSelectedTags = document.createElement('label');
+        labelSelectedTags.setAttribute('for', 'selectedTags');
+        labelSelectedTags.innerText = '已選擇的寵物';
+        selectedTagsDiv.appendChild(labelSelectedTags);
+
+        const selectedTagsInput = document.createElement('input');
+        selectedTagsInput.type = 'text';
+        selectedTagsInput.name = 'selectedTags';
+        selectedTagsInput.className = 'form-control';
+        selectedTagsInput.readOnly = true;
+        selectedTagsDiv.appendChild(selectedTagsInput);
+        
+        tagsContainer.appendChild(selectedTagsDiv);
+        
+        // 將上傳照片的 input 和選擇標籤的 div 添加到容器
+        photoDiv.appendChild(inputFile);
+        photoDiv.appendChild(tagsContainer);
+
+        // 將新創建的 div 添加到主容器中
+        document.getElementById('uploadPhotoContainer').appendChild(photoDiv);
+    }
+
+    function toggleOption(event) {
+        // 在這裡實現選擇標籤的功能
+        const option = event.currentTarget;
+        // 切換選擇狀態或更新已選擇的標籤等邏輯
+    }
+</script>

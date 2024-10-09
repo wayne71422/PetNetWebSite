@@ -1,0 +1,36 @@
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+#app {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+footer {
+    flex-shrink: 0;
+}
+.table-container {
+    background-color: #FFE4E1;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+.table-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+.table-container h3 {
+    color: #666;
+    margin-bottom: 15px;
+}
+.table {
+    margin-bottom: 0;
+}

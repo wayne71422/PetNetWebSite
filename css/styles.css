@@ -1,0 +1,200 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.banner {
+  background-image: url("../img/bgc.png");
+  background-size: cover; /* 圖片覆蓋整個區域 */
+  background-position: center; /* 圖片置中 */
+  background-repeat: no-repeat; /* 防止圖片重複 */
+  height: 150px; /* 可以根據需要調整高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: white; */
+}
+.banner-content {
+  display: flex;
+  justify-content: space-between; /* 將內容平均分佈，圖片分布在兩邊，文字在中間 */
+  align-items: center;
+  width: 100%; /* 讓 header 內容佔滿整個寬度 */
+  padding: 0 20px; /* 讓內容不直接貼邊 */
+}
+
+.banner h1 {
+  color: #ff877d;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+}
+.left-banner-img {
+  width: 100px; /* 根據需要調整圖片大小 */
+  height: auto;
+  /* 調整圖片和文字之間的距離 */
+}
+
+.navbar {
+  background: linear-gradient(to right, #f06292, #c678dd);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.nav-item {
+  margin: 0 20px; /* 增加左右各 10px 的間距 */
+}
+
+/* 使用 flexbox */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* 元素間均分空間 */
+}
+
+.carousel-item img {
+  height: 500px;
+  object-fit: cover;
+}
+
+.section-title {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+body {
+  background-color: white;
+}
+
+.section-title {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.img-fluid {
+  border-radius: 10px;
+}
+
+.gradient-background {
+  background: linear-gradient(to right, #cf82ff, #6dbbff);
+}
+
+.navbar {
+  padding: 15px 0;
+}
+
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand {
+  color: #333;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-brand:hover {
+  color: #0056b3;
+}
+
+footer {
+  color: #333;
+}
+
+footer a {
+  color: #0056b3;
+}
+
+footer a:hover {
+  color: #003d82;
+  text-decoration: none;
+}
+
+/* 如果需要調整按鈕顏色以配合新背景 */
+.btn-outline-primary {
+  color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+.pink-card {
+  background-color: #ffe4e1;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pink-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.section-title {
+  color: #333;
+}
+
+.card-body h5 {
+  color: #0056b3;
+}
+
+.card-body p {
+  color: #666;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+.fixed-height-card {
+  height: 500px;
+  overflow-y: auto;
+}
+
+.doctor-image {
+  max-height: 300px;
+  object-fit: cover;
+  width: 70%;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  margin-bottom: 15px;
+}
+
+.card-body p {
+  flex-grow: 1;
+  overflow-y: auto;
+}

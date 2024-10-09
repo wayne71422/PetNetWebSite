@@ -1,0 +1,75 @@
+﻿@model PetsWebSite.Models.ViewModels.PetCreateVm
+@{
+    ViewBag.Title = "CreatePet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/petList.css" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts {
+    <script src="~/Scripts/petList.js"></script>
+}
+
+<div class="container-md">
+    @using (Html.BeginForm("CreatePet", "PetList", FormMethod.Post, new { enctype = "multipart/form-data"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-header mb-3">
+            <h5 class="modal-title" id="newPetModalLabel">新增寵物</h5>
+        </div>
+        <hr />
+        <div class="form-body mb-3">
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control"}, type = "date" })
+                @Html.ValidationMessageFor(model => model.Birthday, "", new {@class = "text-danger"})
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.SpeciesId, htmlAttributes: new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.SpeciesId, Model.SpeciesItems, "請選擇種類", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SpeciesId, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.BreedId, htmlAttributes: new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.BreedId, Model.BreedItems, "請選擇品種", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BreedId, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.GenderId, htmlAttributes: new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.GenderId, Model.GenderItems, "請選擇性別", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.NeuteredId, htmlAttributes: new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.NeuteredId, Model.NeuteredItems, "請選擇是否結紮", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NeuteredId, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Photo, new { htmlAttributes = new { @class = "form-control" }, type = "file", accept = "image/*" })
+                @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-footer">
+            @*<button type="button" class="btn btn-secondary" onclick="onCancelBtnClick()">
+                    取消
+                </button>*@
+            <a href="@Url.Action("PetList", "PetList")" class="btn btn-secondary">取消</a>
+            <input type="submit" value="保存" class="btn btn-primary" />
+        </div>
+    }
+</div>
+

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>儲值明細</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link href="css/styleBrian.css" rel="stylesheet" />
+    <link href="css/BillDetail.css" rel="stylesheet" />
+  </head>
+  <body class="d-flex flex-column h-100">
+    <div id="app" class="d-flex flex-column h-100">
+      <header>
+        <div class="banner">
+          <img src="/img/13.png" alt="" class="left-banner-img" />
+
+          <h1 class="text-center">貓狗有佳毛孩日記</h1>
+        </div>
+        <nav
+          class="navbar navbar-expand-lg navbar-light gradient-background py-3"
+        >
+          <div class="container-fluid">
+            <a class="navbar-brand" href="初始首頁.html">貓狗有佳毛孩日記</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="初始首頁.html">首頁</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">個人中心</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">預約諮詢</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">寵物日誌</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">儲值相關</a>
+                </li>
+              </ul>
+              <div class="navbar-nav">
+                <a
+                  class="nav-link btn btn-outline-primary me-2"
+                  href="Login.html"
+                  >登入</a
+                >
+                <span class="navbar-text mx-2">|</span>
+                <a class="nav-link btn btn-outline-primary" href="signup.html"
+                  >註冊</a
+                >
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="container solo h-100">
+          <div class="row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="h-100 d-flex flex-column">
+                <h2>儲值紀錄:</h2>
+                <div class="record-content flex-grow-1 overflow-auto">
+                  <ul id="charge-records" class="list-unstyled">
+                    <li>2024/08/31 14:25:10 儲值1000點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+
+                    <!-- 更多紀錄可以動態生成 -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="h-100 d-flex flex-column">
+                <h2>消費明細:</h2>
+                <div class="record-content flex-grow-1 overflow-auto">
+                  <ul id="consume-records" class="list-unstyled">
+                    <li>2024/08/31 14:25:10 張三消費450點</li>
+                    <li>2024/09/02 14:25:10 張三消費500點</li>
+<<<<<<< HEAD
+
+=======
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+                    <li>2024/09/02 14:25:10 儲值150點</li>
+>>>>>>> da0b2128c0309b93b45770222337ebfa9c487157
+                    <!-- 更多紀錄可以動態生成 -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div
+                class="mt-3 d-flex justify-content-between align-items-center"
+              >
+                <p class="mb-0">
+                  剩餘點數: <strong id="balance">200</strong>點
+                </p>
+                <button id="add-balance-btn" class="btn btn-primary">
+                  我要儲值
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer mt-auto py-3 gradient-background text-light">
+        <div class="container">
+          <footer-content></footer-content>
+          <hr />
+          <p class="text-center mb-0">
+            &copy; 2023 貓狗有佳毛孩日記. 版權所有.
+          </p>
+        </div>
+      </footer>
+    </div>
+<<<<<<< HEAD
+    <script src="JS/BillDetail.js"></script>
+=======
+    
+>>>>>>> da0b2128c0309b93b45770222337ebfa9c487157
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref, computed, onMounted } = Vue;
+
+      const FooterContent = {
+        template: `
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>關於我們</h5>
+                    <p>{{ aboutUs }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>聯絡資訊</h5>
+                    <p>電話：{{ contactInfo.phone }}<br>
+                    電子郵件：{{ contactInfo.email }}<br>
+                    地址：{{ contactInfo.address }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>關注我們</h5>
+                    <a v-for="(link, index) in socialLinks" :key="index" :href="link.url" class="text-light me-2">{{ link.name }}</a>
+                </div>
+            </div>
+        `,
+        setup() {
+          const aboutUs = ref(
+            "貓狗有佳毛孩日記致力於為您的寵物提供最優質的服務。"
+          );
+          const contactInfo = ref({
+            phone: "(02) 1234-5678",
+            email: "info@petdiary.com",
+            address: "台北市寵物大道123號",
+          });
+          const socialLinks = ref([
+            { name: "Facebook", url: "#" },
+            { name: "Instagram", url: "#" },
+            { name: "Twitter", url: "#" },
+          ]);
+
+          return {
+            aboutUs,
+            contactInfo,
+            socialLinks,
+          };
+        },
+      };
+
+      const app = createApp({
+        components: {
+          "footer-content": FooterContent,
+        },
+        setup() {
+          // 這裡可以添加通用的邏輯
+
+          return {
+            // 返回通用的數據
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

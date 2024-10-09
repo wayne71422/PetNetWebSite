@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>貓狗有佳毛孩日記</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+    <link href="css/stylesWayne.css" rel="stylesheet" />
+    <link href="css/PhotoAlbum.css" rel="stylesheet" />
+    <!--link href="/css/Login.css" rel="stylesheet" /-->
+    <!-- 添加 Bootstrap 圖標 CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    <script src="./JS/PhotoAlbum.js"></script>
+</head>
+  <body>
+    <div id="app">
+      <header>
+        <div class="banner">
+          <img src="img/13.png" alt="" class="left-banner-img" />
+          <h1 class="text-center">貓狗有佳毛孩日記</h1>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light gradient-background">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="初始首頁.html">貓狗有佳毛孩日記</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="初始首頁.html">首頁</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">個人中心</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">預約諮詢</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">儲值相關</a>
+                </li>
+              </ul>
+
+              <div class="navbar-nav">
+                <a
+                  class="nav-link btn btn-outline-primary me-2"
+                  href="Login.html"
+                  >登入</a
+                >
+                <span class="navbar-text mx-2">|</span>
+                <a class="nav-link btn btn-outline-primary" href="signup.html">
+                  註冊
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+      
+          <h1>我的圖片相簿</h1>
+          <div class="search-container">
+              <div style="position: relative;">
+                  <input type="text" id="search-input" placeholder="   輸入寵物名字搜尋圖片">
+                  <i class="fas fa-search search-icon"></i>
+                  <div id="results" class="dropdown-menu"></div>
+              </div>
+              <button id="search-button">搜尋</button>
+          </div>
+          <div id="results" class="dropdown-menu"></div>
+          <div class="gallery" id="gallery">
+              <img src="圖片1.jpg" alt="" data-tags="貓咪 寵物 陽光">
+              <img src="圖片2.jpg" alt="" data-tags="風景 日出 山">
+              <img src="圖片3.jpg" alt="" data-tags="海灘 椰子樹 夏天">
+              <img src="圖片4.jpg" alt="" data-tags="城市 街道 人群">
+              <img src="圖片5.jpg" alt="" data-tags="食物 蛋糕 甜點">
+              <img src="圖片6.jpg" alt="" data-tags="自然 森林 溪流">
+          </div>
+
+          <script>
+              const searchInput2 = document.getElementById('search-input');
+              const searchButton = document.getElementById('search-button');
+              const gallery = document.getElementById('gallery');
+              const images = gallery.getElementsByTagName('img');
+
+              function performSearch() {
+                  const searchTerm = searchInput2.value.toLowerCase();
+
+                  for (let img of images) {
+                      const alt = img.getAttribute('alt').toLowerCase();
+                      const tags = img.getAttribute('data-tags').toLowerCase();
+
+                      if (alt.includes(searchTerm) || tags.includes(searchTerm)) {
+                          img.style.display = '';
+                      } else {
+                          img.style.display = 'none';
+                      }
+                  }
+              }
+
+              searchInput.addEventListener('input', performSearch);
+              searchButton.addEventListener('click', performSearch);
+
+              searchInput.addEventListener('keypress', function (e) {
+                  if (e.key === 'Enter') {
+                      performSearch();
+                  }
+              });
+              const options = ["選項一", "選項二", "選項三", "選項四", "選項五"];
+              const searchInput = document.getElementById('search-container');
+              const resultsContainer = document.getElementById('results');
+
+            searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            resultsContainer.innerHTML = '';
+
+            if (query) {
+                const filteredOptions = options.filter(option => option.toLowerCase().includes(query));
+                
+                filteredOptions.forEach(option => {
+                    const item = document.createElement('div');
+                    item.className = 'dropdown-item';
+                    item.textContent = option;
+                    item.onclick = () => {
+                        searchInput.value += (searchInput.value ? ', ' : '') + option; // 添加選擇的選項
+                        resultsContainer.innerHTML = ''; // 清空下拉選單
+                        resultsContainer.style.display = 'none'; // 隱藏下拉選單
+                    };
+                    resultsContainer.appendChild(item);
+                });
+
+                // 如果有過濾結果，顯示下拉選單
+                if (filteredOptions.length > 0) {
+                    resultsContainer.style.display = 'block';
+                } else {
+                    resultsContainer.style.display = 'none'; // 沒有結果時隱藏
+                }
+            } else {
+                resultsContainer.style.display = 'none'; // 如果輸入框為空，隱藏下拉選單
+            }
+        });
+
+        // 點擊輸入框外部時隱藏下拉選單
+        document.addEventListener('click', (event) => {
+            if (!searchInput.contains(event.target) && !resultsContainer.contains(event.target)) {
+                resultsContainer.style.display = 'none';
+            }
+        });
+          </script>
+          <footer class="footer mt-auto py-3 gradient-background text-light">
+              <div class="container">
+                  <footer-content></footer-content>
+                  <hr />
+                  <p class="text-center mb-0">
+                      &copy; 2023 貓狗有佳毛孩日記. 版權所有.
+                  </p>
+              </div>
+          </footer>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref, computed, onMounted } = Vue;
+
+      const FooterContent = {
+        template: `
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>關於我們</h5>
+                    <p>{{ aboutUs }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>聯絡資訊</h5>
+                    <p>電話：{{ contactInfo.phone }}<br>
+                    電子郵件：{{ contactInfo.email }}<br>
+                    地址：{{ contactInfo.address }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>關注我們</h5>
+                    <a v-for="(link, index) in socialLinks" :key="index" :href="link.url" class="text-light me-2">{{ link.name }}</a>
+                </div>
+            </div>
+        `,
+        setup() {
+          const aboutUs = ref(
+            "貓狗有佳毛孩日記致力於為您的寵物提供最優質的服務。"
+          );
+          const contactInfo = ref({
+            phone: "(02) 1234-5678",
+            email: "info@petdiary.com",
+            address: "台北市寵物大道123號",
+          });
+          const socialLinks = ref([
+            { name: "Facebook", url: "#" },
+            { name: "Instagram", url: "#" },
+            { name: "Twitter", url: "#" },
+          ]);
+
+          return {
+            aboutUs,
+            contactInfo,
+            socialLinks,
+          };
+        },
+      };
+
+      const app = createApp({
+        components: {
+          "footer-content": FooterContent,
+        },
+        setup() {
+          // 這裡可以添加通用的邏輯
+
+          return {
+            // 返回通用的數據
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+</body>
+</html>

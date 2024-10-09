@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "點數儲值";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var memberName = Session["MemberName"] != null ? Session["MemberName"].ToString() : "訪客";
+}
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">點數儲值</h2>
+    <div class="row">
+        <!-- 左側面板 -->
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>價格</th>
+                        <th>點數</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input class="form-check-input" type="radio" name="amount" id="amount100" value="100">
+                            <label class="form-check-label" for="amount100">NT $100</label>
+                        </td>
+                        <td>點數 + 100</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="form-check-input" type="radio" name="amount" id="amount250" value="250">
+                            <label class="form-check-label" for="amount250">NT $250</label>
+                        </td>
+                        <td>點數 + 250</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="form-check-input" type="radio" name="amount" id="amount500" value="500">
+                            <label class="form-check-label" for="amount500">NT $500</label>
+                        </td>
+                        <td>點數 + 500</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="form-check-input" type="radio" name="amount" id="amount1000" value="1000">
+                            <label class="form-check-label" for="amount1000">NT $1000</label>
+                        </td>
+                        <td>點數 + 1,000</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="form-check-input" type="radio" name="amount" id="amount2500" value="2500">
+                            <label class="form-check-label" for="amount2500">NT $2500</label>
+                        </td>
+                        <td>點數 + 2,500</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 右側面板 -->
+        <div class="col-md-4">
+            <div id="infoBox" class="p-4 bg-light">
+                <p>請於左側選擇儲值金額</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 用戶名稱隱藏 -->
+    <input type="hidden" id="memberName" value="@memberName" />
+</div>
+
+@section scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const memberName = document.getElementById("memberName").value;
+
+            // 當使用者選擇某個金額時更新顯示內容
+            document.querySelectorAll('input[name="amount"]').forEach((radio) => {
+                radio.addEventListener("change", function () {
+                    const selectedAmount = this.value;
+
+                    // 動態生成確認購買內容的表單
+                    document.getElementById("infoBox").innerHTML = `
+                            <div id="purchaseInfo" class="center-text">
+                                <h3>確認購買內容</h3>
+                                <p><strong>商品:</strong> 點數 + ${selectedAmount}</p>
+                                <p><strong>價格:</strong> NT$ ${selectedAmount}</p>
+                                <p><strong>儲值方式:</strong> 點擊支付</p>
+                                <p><strong>使用者名稱:</strong> ${memberName}</p>
+                                <p>
+                                    <input type="checkbox" id="agreeTerms"> 
+                                    我同意所有條款
+                                </p>
+                                <button type="button" class="btn btn-danger" onclick="submitForm()">確認</button>
+                            </div>
+                        `;
+                });
+            });
+        });
+
+    function submitForm() {
+    const selectedAmount = document.querySelector('input[name="amount"]:checked').value;  // 獲取選擇的金額
+        const isAgreed = document.getElementById("agreeTerms").checked;
+        
+    if (isAgreed) {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("DepositPoints", "Deposit")",
+            data: {
+                DepositAmount: selectedAmount,  // 將選擇的金額傳遞到伺服器
+                memberName: document.getElementById("memberName").value
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert("購買成功！餘額已更新。");
+                } else {
+                    alert("儲值失敗：" + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error: ", error);
+                alert("請求失敗，請稍後再試。");
+            }
+        });
+    } else {
+        alert("請同意條款後再進行確認");
+    }
+}
+       
+
+    </script>
+}

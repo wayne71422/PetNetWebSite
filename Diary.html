@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>貓狗有佳毛孩日記</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/stylesWayne.css" rel="stylesheet" />
+    <link href="css/diary.css" rel="stylesheet" />
+    <!--link href="/css/Login.css" rel="stylesheet" /-->
+
+    <!-- 添加 Bootstrap 圖標 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./JS/diary.js"></script>
+    <script>
+      function toggleOption(event) {
+          const option = event.target;
+          option.classList.toggle('selected');
+          updateInput();
+      }
+
+      function updateInput() {
+          const selectedOptions = Array.from(document.querySelectorAll('.selected')).map(option => option.dataset.value);
+          document.querySelector('input[name="selectedTags"]').value = selectedOptions.join(', ');
+      }
+      function toggleDivs() {
+            const select = document.querySelector('select[name="newTitle"]');
+            const describeDiv = document.querySelector('.describe');
+            const weightDiv = document.querySelector('.weight');
+
+            // 隱藏所有相關的 div
+            describeDiv.style.display = 'none';
+            weightDiv.style.display = 'none';
+
+            // 根據選擇的值顯示相應的 div
+            if (select.value === "wgtRecord") {
+                describeDiv.style.display = 'block'; // 顯示內容
+                weightDiv.style.display = 'block'; // 顯示體重
+            } else if (["dailyRecord", "docRecord", "medRecord", "others"].includes(select.value)) {
+                describeDiv.style.display = 'block'; // 顯示內容
+            }
+        }
+  </script>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <div class="banner">
+          <img src="img/13.png" alt="" class="left-banner-img" />
+          <h1 class="text-center">貓狗有佳毛孩日記</h1>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light gradient-background">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="初始首頁.html">貓狗有佳毛孩日記</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="初始首頁.html">首頁</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">個人中心</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">預約諮詢</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">儲值相關</a>
+                </li>
+              </ul>
+
+              <div class="navbar-nav">
+                <a
+                  class="nav-link btn btn-outline-primary me-2"
+                  href="Login.html"
+                  >登入</a
+                >
+                <span class="navbar-text mx-2">|</span>
+                <a class="nav-link btn btn-outline-primary" href="signup.html">
+                  註冊
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main class="mb-5">
+        <div class="pageTitleBox">
+          <div class="pageTitle">寵物日常紀錄：</div>
+          <div class="pageTitle">阿咪</div>
+        </div>
+        <div class="whole-year-box">
+          <div class="year-box">
+            <div class="year">2024年</div>
+            <div class="arrow-down-y">▼</div>
+          </div>
+          <div class="month-box">
+            <div class="month-title-box">
+              <div class="month">9月</div>
+              <div class="arrow-down-m">▼</div>
+            </div>
+            <div class="container diary-box">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-auto">
+                    <div class="recordDate text-center">
+                      <div>12/10</div>
+                    </div>
+                </div>
+                <div class="col-9">
+                  <div class="record-box">
+                    <div class="title">體重紀錄</div>
+                    <div class="content">3.5kg</div>
+                    <div class="pics">
+                      <img src="./img/footprint.png" class="img-fluid" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="container diary-box">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-auto">
+                    <div class="recordDate text-center">
+                      <div>9/8</div>
+                    </div>
+                </div>
+                <div class="col-9">
+                  <div class="record-box">
+                    <div class="title">體重紀錄</div>
+                    <div class="content">3.5kg</div>
+                    <div class="pics">
+                      <img src="./img/footprint.png" class="img-fluid" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="year-box"></div>
+        <div class="year-box"></div>
+        <div class="year-box"></div> -->
+        
+        
+        <!-- 添加新的按鈕 -->
+        <button
+          class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4"
+          id="addDiaryBtn"
+          data-bs-toggle="modal"
+          data-bs-target="#newDiaryModal"
+        >
+          <i class="bi bi-plus"></i>
+        </button>
+
+        <!-- 新日記 Modal -->
+        <div
+          class="modal fade"
+          id="newDiaryModal"
+          tabindex="-1"
+          aria-labelledby="newDiaryModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="newDiaryModalLabel">新增日記</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  id="closeModalBtn"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="newDiaryForm">
+                  <div class="mb-3">
+                    <input type="date" id="newBday" class="form-control" />
+                  </div>
+                  <div class="mt-3">
+                    <div class="mb-3">
+                        <label for="diaryTitle" class="form-label">紀錄類別</label>
+                        <select name="newTitle" id="newTitle" class="form-select" required onchange="toggleDivs()">
+                            <option value=""></option>
+                            <option value="dailyRecord">日常紀錄</option>
+                            <option value="docRecord">就醫紀錄</option>
+                            <option value="medRecord">用藥紀錄</option>
+                            <option value="wgtRecord">體重紀錄</option>
+                            <option value="others">其他</option>
+                        </select>
+                    </div>
+            
+                    <div class="mb-3 describe" style="display:block;">
+                        <label for="newContent" class="form-label">內容</label>
+                        <textarea class="form-control mt-1" id="newContent" rows="3" required></textarea>
+                    </div>                           
+                    <div class="mb-3 weight justify-content-start " style="display:none;">
+                      <label for="weightContent" class="form-label">體重</label>
+                      <div class="row align-items-center left-align">
+                          <div class="col-8">
+                              <textarea class="form-control mt-1" id="weightContent" rows="1" required></textarea>
+                          </div>
+                          <div class="col-4">
+                              <label>公斤</label>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                 <div class="uploadPhotoContainer">
+                  <div class="mt-2" id="uploadPhoto">
+                      <label for="newPhoto" class="form-label">上傳照片</label>
+                      <button type="button" id="addPhotoBtn" onclick="addPhoto()">
+                          +
+                      </button>
+                      <input type="file"
+                             class="form-control photos"
+                             accept="image/*" />
+                             <div class="row">
+                    
+                              <div class="container mt-2 chooseTags">
+                                <label for="tags">選擇照片中有的寵物</label>
+                                <div id="tags" class="border p-2 tags-background">
+                                    <div class="selectable-option" data-value="aa" onclick="toggleOption(event)">aa</div>
+                                    <div class="selectable-option" data-value="bb" onclick="toggleOption(event)">bb</div>
+                                    <div class="selectable-option" data-value="cc" onclick="toggleOption(event)">cc</div>
+                                    <div class="selectable-option" data-value="ddhhhhh" onclick="toggleOption(event)">ddhhhhh</div>
+                                    <div class="selectable-option" data-value="ee" onclick="toggleOption(event)">ee</div>
+                                </div>
+                        
+                                <div class="mt-2">
+                                    <label for="selectedTags">已選擇的寵物</label>
+                                    <input type="text" name="selectedTags" class="form-control" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-2">
+                                <label for="diaryTitle" class="form-label"></label>
+                                
+                            </div>
+                          </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  取消
+                </button>
+                <button type="button" class="btn btn-primary" id="saveDiaryBtn">
+                  保存
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer mt-auto py-3 gradient-background text-light">
+        <div class="container">
+          <footer-content></footer-content>
+          <hr />
+          <p class="text-center mb-0">
+            &copy; 2023 貓狗有佳毛孩日記. 版權所有.
+          </p>
+        </div>
+      </footer>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref, computed, onMounted } = Vue;
+
+      const FooterContent = {
+        template: `
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>關於我們</h5>
+                    <p>{{ aboutUs }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>聯絡資訊</h5>
+                    <p>電話：{{ contactInfo.phone }}<br>
+                    電子郵件：{{ contactInfo.email }}<br>
+                    地址：{{ contactInfo.address }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>關注我們</h5>
+                    <a v-for="(link, index) in socialLinks" :key="index" :href="link.url" class="text-light me-2">{{ link.name }}</a>
+                </div>
+            </div>
+        `,
+        setup() {
+          const aboutUs = ref(
+            "貓狗有佳毛孩日記致力於為您的寵物提供最優質的服務。"
+          );
+          const contactInfo = ref({
+            phone: "(02) 1234-5678",
+            email: "info@petdiary.com",
+            address: "台北市寵物大道123號",
+          });
+          const socialLinks = ref([
+            { name: "Facebook", url: "#" },
+            { name: "Instagram", url: "#" },
+            { name: "Twitter", url: "#" },
+          ]);
+
+          return {
+            aboutUs,
+            contactInfo,
+            socialLinks,
+          };
+        },
+      };
+
+      const app = createApp({
+        components: {
+          "footer-content": FooterContent,
+        },
+        setup() {
+          // 這裡可以添加通用的邏輯
+
+          return {
+            // 返回通用的數據
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

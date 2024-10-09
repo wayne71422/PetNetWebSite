@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background-image: url("/img/Corgi&cat.png");
+  background-size: cover; /* 圖片覆蓋整個區域 */
+  background-position: center; /* 圖片置中 */
+  background-repeat: no-repeat; /* 防止圖片重複 */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 保持頁面高度 */
+  overflow-x: hidden; /* 防止水平滾動 */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+main {
+  flex: 1;
+}
+.container1 {
+  max-width: 600px;
+  height: 500px;
+  background-color: #ffe6e6;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+.container {
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+h2 {
+  text-align: center;
+  color: #653d2e;
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+label {
+  font-weight: bold;
+  color: #555;
+}
+
+/* 美化按鈕 */
+#editButton {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#editButton.btn-primary {
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  border: none;
+}
+
+#editButton.btn-success {
+  background: linear-gradient(135deg, #28a745, #218838);
+  border: none;
+}
+
+/* 上傳圖片區域的樣式 */
+#profilePicture {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px dashed #ddd;
+}
+
+/* 提示訊息的字體顏色 */
+.form-text {
+  color: #888;
+}
+footer {
+  margin-top: auto;
+  background-color: #343a40;
+  color: white;
+  padding: 20px;
+}
+#userInfo {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#userInfo p {
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 2;
+  color: #653d2e;
+}
+#userInfo p:last-child {
+  margin-bottom: 0;
+}
+.btn {
+  background-color: #d8caec;
+  color: #653d2e;
+}

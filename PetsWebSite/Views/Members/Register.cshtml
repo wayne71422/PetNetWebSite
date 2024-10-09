@@ -1,0 +1,56 @@
+﻿@model PetsWebSite.Models.ViewModels.RegisterVm
+
+@section styles {
+    <link href="~/css/Bookpage.css" rel="stylesheet">
+    }
+
+<main class="container-md">
+    <div class="wrapper">
+        @using (Html.BeginForm("Register", "Members", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <h2>註冊</h2>
+            <div class="input-box">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = "required" })
+                <label for="Email">電子信箱&帳號</label>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" }) <!-- 驗證訊息 -->
+            </div>
+            <div class="input-box">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required" })
+                <label for="Password">密碼</label>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" }) <!-- 驗證訊息 -->
+            </div>
+
+            <div class="input-box">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "required" })
+                <label for="ConfirmPassword">確認密碼</label>
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" }) <!-- 驗證訊息 -->
+            </div>
+            <div class="input-box">
+                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", type = "text", required = "required" })
+                <label for="Mobile">手機號碼</label>
+                @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger" }) <!-- 驗證訊息 -->
+            </div>
+            <div class="input-box">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", type = "text", required = "required" })
+                <label for="Name">姓名</label>
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" }) <!-- 驗證訊息 -->
+            </div>
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox" required /> 我同意所有條款
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">註冊送出</button>
+            <div class="register-link">
+                <p>已經有帳號? <a href="@Url.Action("Login", "Members")">點擊登入</a></p>
+            </div>
+        }
+    </div>
+</main>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

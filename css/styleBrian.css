@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.banner {
+  background-image: url("/img/bgc.png");
+  background-size: cover; /* 圖片覆蓋整個區域 */
+  background-position: center; /* 圖片置中 */
+  background-repeat: no-repeat; /* 防止圖片重複 */
+  height: 150px; /* 可以根據需要調整高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: white; */
+}
+.banner-content {
+  display: flex;
+  justify-content: space-between; /* 將內容平均分佈，圖片分布在兩邊，文字在中間 */
+  align-items: center;
+  width: 100%; /* 讓 header 內容佔滿整個寬度 */
+  padding: 0 20px; /* 讓內容不直接貼邊 */
+}
+
+.banner h1 {
+  color: #ff877d;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+}
+.left-banner-img {
+  width: 100px; /* 根據需要調整圖片大小 */
+  height: auto;
+  /* 調整圖片和文字之間的距離 */
+}
+.gradient-background {
+  background: linear-gradient(to right, #cf82ff, #6dbbff);
+}
+
+.navbar {
+  padding: 15px 0;
+}
+
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand {
+  color: #333;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-brand:hover {
+  color: #0056b3;
+}
+
+footer {
+  color: #333;
+}
+
+footer a {
+  color: #0056b3;
+}
+
+footer a:hover {
+  color: #003d82;
+  text-decoration: none;
+}
+
+/* 如果需要調整按鈕顏色以配合新背景 */
+.btn-outline-primary {
+  color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>預約登記-貓狗有佳毛孩日記</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/stylesWayne.css" rel="stylesheet">
+    <link href="css/Login.css" rel="stylesheet" />
+</head>
+<body class="d-flex flex-column h-100">
+    <div id="app" class="d-flex flex-column h-100">
+        <header>
+            <div class="banner">
+              <img src="img/13.png" alt="" class="left-banner-img" />
+      
+              <h1 class="text-center">貓狗有佳毛孩日記</h1>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light gradient-background py-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="初始首頁.html">貓狗有佳毛孩日記</a>
+                    <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    >
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                        <a class="nav-link" href="初始首頁.html">首頁</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">個人中心</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">預約諮詢</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">儲值相關</a>
+                        </li>
+                    </ul>
+                    <div class="navbar-nav">
+                        <a class="nav-link btn btn-outline-primary me-2" href="Login.html">登入</a>
+                        <span class="navbar-text mx-2">|</span>
+                        <a class="nav-link btn btn-outline-primary" href="signup.html">註冊</a>
+                    </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="flex-shrink-0">
+            <div class="container py-5">
+                <div class="form-container">
+                    <h2>預約諮詢</h2>
+                    <form @submit.prevent="submitForm">
+                        <div class="form-group">
+                            <label for="petName">寵物姓名：</label>
+                            <input type="text" id="petName" v-model="petName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="doctor">醫生名稱：</label>
+                            <select id="doctor" v-model="selectedDoctor" @change="fetchDoctorAvailability" required>
+                                <option value="">請選擇</option>
+                                <option v-for="doctor in doctors" :key="doctor.id" :value="doctor.id">{{ doctor.name }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group" v-if="availableDates.length">
+                            <label for="date">預約日期：</label>
+                            <select id="date" v-model="selectedDate" @change="updateAvailableTimes" required>
+                                <option value="">請選擇</option>
+                                <option v-for="date in availableDates" :key="date" :value="date">{{ date }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group" v-if="availableTimes.length">
+                            <label for="time">時間：</label>
+                            <select id="time" v-model="selectedTime" required>
+                                <option value="">請選擇</option>
+                                <option v-for="time in availableTimes" :key="time" :value="time">{{ time }}</option>
+                            </select>
+                        </div>
+                        <button type="submit" :disabled="!isFormValid">送出預約</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer class="gradient-background text-light py-4">
+            <div class="container">
+                <footer-content></footer-content>
+                <hr>
+                <p class="text-center mb-0">&copy; 2023 貓狗有佳毛孩日記. 版權所有.</p>
+            </div>
+        </footer>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref, computed, onMounted } = Vue;
+
+        const FooterContent = {
+        template: `
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>關於我們</h5>
+                    <p>{{ aboutUs }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>聯絡資訊</h5>
+                    <p>電話：{{ contactInfo.phone }}<br>
+                    電子郵件：{{ contactInfo.email }}<br>
+                    地址：{{ contactInfo.address }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>關注我們</h5>
+                    <a v-for="(link, index) in socialLinks" :key="index" :href="link.url" class="text-light me-2">{{ link.name }}</a>
+                </div>
+            </div>
+        `,
+        setup() {
+            const aboutUs = ref('貓狗有佳毛孩日記致力於為您的寵物提供最優質的服務。');
+            const contactInfo = ref({
+                phone: '(02) 1234-5678',
+                email: 'info@petdiary.com',
+                address: '台北市寵物大道123號'
+            });
+            const socialLinks = ref([
+                { name: 'Facebook', url: '#' },
+                { name: 'Instagram', url: '#' },
+                { name: 'Twitter', url: '#' }
+            ]);
+
+            return {
+                aboutUs,
+                contactInfo,
+                socialLinks
+            };
+        }};
+
+        const app = createApp({
+            components: {
+                'footer-content': FooterContent
+            },
+            setup() {
+                const petName = ref('');
+                const selectedDoctor = ref('');
+                const selectedDate = ref('');
+                const selectedTime = ref('');
+                
+                const doctors = ref([
+                    { id: 1, name: '王大明醫生' },
+                    { id: 2, name: '李小芳醫生' },
+                    // 可以添加更多醫生
+                ]);
+                
+                const availableDates = ref([]);
+                const availableTimes = ref([]);
+
+                const slides = ref([
+                    { image: 'img/cat-lg-01.jpg', alt: '可愛的貓咪', link: '#' },
+                    { image: 'img/dog-lg-01.jpg', alt: '活潑的狗狗', link: '#' },
+                    { image: 'img/cat-lg-02.jpg', alt: '寵物和主人', link: '#' }
+                ]);
+
+                const fetchDoctorAvailability = async () => {
+                    // 這裡應該是一個 API 調用來獲取醫生的可用日期
+                    // 為了示範，我們使用模擬數據
+                    await new Promise(resolve => setTimeout(resolve, 500)); // 模擬 API 延遲
+                    availableDates.value = ['2023-05-01', '2023-05-02', '2023-05-03'];
+                    selectedDate.value = ''; // 重置選擇的日期
+                    availableTimes.value = []; // 重置可用時間
+                };
+
+                const updateAvailableTimes = async () => {
+                    // 這裡應該是另一個 API 調用來獲取選定日期的可用時間
+                    // 同樣使用模擬數據
+                    await new Promise(resolve => setTimeout(resolve, 500)); // 模擟 API 延遲
+                    availableTimes.value = ['09:00', '10:00', '11:00', '14:00', '15:00'];
+                    selectedTime.value = ''; // 重置選擇的時間
+                };
+
+                const isFormValid = computed(() => {
+                    return petName.value && selectedDoctor.value && selectedDate.value && selectedTime.value;
+                });
+
+                const submitForm = () => {
+                    if (isFormValid.value) {
+                        console.log('預約資料:', {
+                            petName: petName.value,
+                            doctor: selectedDoctor.value,
+                            date: selectedDate.value,
+                            time: selectedTime.value
+                        });
+                        alert('預約已送出！');
+                        // 重置表單
+                        petName.value = '';
+                        selectedDoctor.value = '';
+                        selectedDate.value = '';
+                        selectedTime.value = '';
+                        availableDates.value = [];
+                        availableTimes.value = [];
+                    }
+                };
+
+                onMounted(() => {
+                    // 初始化輪播圖
+                    const myCarousel = document.querySelector('#carouselExampleIndicators');
+                    const carousel = new bootstrap.Carousel(myCarousel, {
+                        interval: 5000,
+                        wrap: true
+                    });
+                    carousel.cycle();
+
+                    // 這裡可以添加從後台獲取用戶資料的邏輯
+                    // fetchUserData();
+                });
+
+                // 假設這是從後台獲取用戶資料的函數
+                // const fetchUserData = async () => {
+                //     // 這裡應該是一個 API 調用來獲取用戶資料
+                //     // const userData = await api.getUserData();
+                //     // 使用獲取到的數據更新相關狀態
+                // };
+
+                return {
+                    petName,
+                    selectedDoctor,
+                    selectedDate,
+                    selectedTime,
+                    doctors,
+                    availableDates,
+                    availableTimes,
+                    slides,
+                    fetchDoctorAvailability,
+                    updateAvailableTimes,
+                    isFormValid,
+                    submitForm
+                };
+            }
+        });
+
+        
+        app.mount('#app');
+    </script>
+</body>
+</html>

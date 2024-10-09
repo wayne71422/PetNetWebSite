@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "首頁";
+}
+
+
+
+
+
+
+
+<div id="app">
+    <!-- 輪播圖片 -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+            <button v-for="(slide, index) in slides" :key="index" type="button"
+                    data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="index" :class="{ active: index === 0 }"
+                    :aria-current="index === 0 ? 'true' : 'false'" :aria-label="'Slide ' + (index + 1)">
+            </button>
+        </div>
+        <div class="carousel-inner">
+            <div v-for="(slide, index) in slides" :key="index" class="carousel-item" :class="{ active: index === 0 }">
+                <a :href="slide.link">
+                    <img :src="slide.image" class="d-block w-100" :alt="slide.alt" />
+                </a>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- 紀錄寵物的每一刻 -->
+    <div class="container py-5">
+        <div class="card pink-card">
+            <div class="card-body">
+                <h2 class="text-center section-title">紀錄寵物的每一刻</h2>
+                <p class="text-center">
+                    在貓狗有佳毛孩日記，我們幫助您記錄寵物生活中的每個精彩時刻。從日常生活到特別的里程碑，我們都為您的寵物提供專業的照護和紀錄服務。讓我們一起創造美好的回憶，見證您與寵物之間的深厚感情。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 獸醫專業 & 流程介紹 -->
+    <div class="container py-5">
+        <div class="row">
+            <a href="#" class="col-md-6 card-link">
+                <div class="card pink-card fixed-height-card">
+                    <div class="card-body">
+                        <h2 class="section-title">獸醫專業</h2>
+                        <img src="/img/docter.jpg" class="img-fluid mb-3 doctor-image" alt="貓科專業醫生" />
+                        <h5>王大明 獸醫師</h5>
+                        <p>
+                            王大明獸醫師擁有超過15年的貓科診療經驗，專精於貓咪行為學和營養學。他致力於為每一隻貓咪提供最適合的醫療照護。
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="col-md-6 card-link">
+                <div class="card pink-card fixed-height-card">
+                    <div class="card-body">
+                        <h2 class="section-title">流程介紹</h2>
+                        <h5>寵物照護流程</h5>
+                        <p>
+                            1. 預約諮詢<br />
+                            2. 健康檢查<br />
+                            3. 制定照護計劃<br />
+                            4. 定期回診<br />
+                            5. 線上紀錄追蹤
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- 頁尾 -->
+</div>
+
+@section scripts {
+    <script>
+        // 初始化 Vue 實例
+        const app = Vue.createApp({
+            
+            data() {
+                return {
+                    slides: [
+                        { image: "/img/cat-lg-01.jpg", alt: "可愛的貓咪", link: "#" },
+                        { image: "/img/dog-lg-01.jpg", alt: "活潑的狗狗", link: "#" },
+                        { image: "/img/t01912a6d8f6755f0bf.jpg", alt: "小短腿", link: "#" }
+                    ]
+                };
+            },
+            mounted() {
+                // 初始化 Bootstrap 的輪播功能
+                var myCarousel = document.querySelector("#carouselExampleIndicators");
+                if (myCarousel) {
+                    var carousel = new bootstrap.Carousel(myCarousel, {
+                        interval: 5000,
+                        wrap: true
+                    });
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+}
+
+}

@@ -1,0 +1,70 @@
+<div id="app">
+    <!-- 輪播圖片 -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button v-for="(slide, index) in slides" :key="index" type="button" data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="index" :class="{ active: index === 0 }" :aria-current="index === 0 ? 'true' : 'false'" :aria-label="'Slide ' + (index + 1)"></button>
+        </div>
+        <div class="carousel-inner">
+            <div v-for="(slide, index) in slides" :key="index" class="carousel-item" :class="{ active: index === 0 }">
+                <a :href="slide.link">
+                    <img :src="slide.image" class="d-block w-100" :alt="slide.alt">
+                </a>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- 紀錄寵物的每一刻 -->
+    <div class="container">
+        <h2 class="text-center section-title">紀錄寵物的每一刻</h2>
+        <p class="text-center">在貓狗有佳毛孩日記，我們幫助您記錄寵物生活中的每個精彩時刻。從日常生活到特別的里程碑，我們都為您的寵物提供專業的照護和紀錄服務。讓我們一起創造美好的回憶，見證您與寵物之間的深厚感情。</p>
+    </div>
+
+    <!-- 貓科專業 & 流程介紹 -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="section-title">貓科專業</h2>
+                <div class="card">
+                    <img src="img/cat-lg-01.jpg" class="card-img-top" alt="貓科專業醫生">
+                    <div class="card-body">
+                        <h5 class="card-title">王大明 獸醫師</h5>
+                        <p class="card-text">王大明獸醫師擁有超過15年的貓科診療經驗，專精於貓咪行為學和營養學。他致力於為每一隻貓咪提供最適合的醫療照護。</p>
+                        <a href="#" class="btn btn-primary">了解更多</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="section-title">流程介紹</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">寵物照護流程</h5>
+                        <p class="card-text">1. 預約諮詢<br>2. 健康檢查<br>3. 制定照護計劃<br>4. 定期回診<br>5. 線上紀錄追蹤</p>
+                        <a href="#" class="btn btn-primary">詳細流程</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        slides: [
+            { image: 'img/cat-lg-01.jpg', alt: '可愛的貓咪', link: '#' },
+            { image: 'img/dog-lg-01.jpg', alt: '活潑的狗狗', link: '#' },
+            { image: 'img/cat-lg-01.jpg', alt: '寵物和主人', link: '#' }
+        ]
+    }
+});
+</script>

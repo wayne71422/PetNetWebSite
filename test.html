@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模糊查詢輸入框</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .dropdown-menu {
+            max-height: 200px;
+            overflow-y: auto;
+            display: none; /* 初始隱藏 */
+            position: absolute; /* 絕對定位 */
+            z-index: 1000; /* 確保下拉菜單在其他元素之上 */
+        }
+        .dropdown-item:hover {
+            background-color: #f8f9fa; /* 鼠標懸停時的背景色 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="dropdown" style="position: relative;">
+            <input type="text" id="search" class="form-control" placeholder="輸入查詢...">
+            <div id="results" class="dropdown-menu"></div>
+        </div>
+    </div>
+
+    <script>
+        const options = ["選項一", "選項二", "選項三", "選項四", "選項五"];
+        const searchInput = document.getElementById('search');
+        const resultsContainer = document.getElementById('results');
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            resultsContainer.innerHTML = '';
+
+            if (query) {
+                const filteredOptions = options.filter(option => option.toLowerCase().includes(query));
+                
+                filteredOptions.forEach(option => {
+                    const item = document.createElement('div');
+                    item.className = 'dropdown-item';
+                    item.textContent = option;
+                    item.onclick = () => {
+                        searchInput.value += (searchInput.value ? ', ' : '') + option; // 添加選擇的選項
+                        resultsContainer.innerHTML = ''; // 清空下拉選單
+                        resultsContainer.style.display = 'none'; // 隱藏下拉選單
+                    };
+                    resultsContainer.appendChild(item);
+                });
+
+                // 如果有過濾結果，顯示下拉選單
+                if (filteredOptions.length > 0) {
+                    resultsContainer.style.display = 'block';
+                } else {
+                    resultsContainer.style.display = 'none'; // 沒有結果時隱藏
+                }
+            } else {
+                resultsContainer.style.display = 'none'; // 如果輸入框為空，隱藏下拉選單
+            }
+        });
+
+        // 點擊輸入框外部時隱藏下拉選單
+        document.addEventListener('click', (event) => {
+            if (!searchInput.contains(event.target) && !resultsContainer.contains(event.target)) {
+                resultsContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

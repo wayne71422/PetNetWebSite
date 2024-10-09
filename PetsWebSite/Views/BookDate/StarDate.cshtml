@@ -1,0 +1,71 @@
+﻿@model PetsWebSite.Models.ViewModels.BookDateRecordVm
+
+@{
+    ViewBag.Title = "StarDate";
+}
+
+@section styles{
+    <!-- Custom styles for this page -->
+
+
+    <link href="~/css/Bookpage.css" rel="stylesheet">
+}
+
+<div class="flex-shrink-0">
+    <div class="container py-5">
+        <div class="form-container">
+            <h4>開始預約</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    寵物名稱
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PetName)
+                </dd>
+
+                <dt>
+                    諮詢醫生
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DoctorName)
+                </dd>
+
+                <dt>
+                    訂約日期
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+
+                <dt>
+                    預約時間
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BookTime)
+                </dd>
+
+                <dt>
+                    目前狀態
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsStartStr)
+                </dd>
+
+            </dl>
+
+
+            <div>
+                <form method="post" action="@Url.Action("StarDate", "BookDate")">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-sm btn-success">完成並結束諮詢</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

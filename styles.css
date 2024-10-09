@@ -1,0 +1,169 @@
+.banner {
+    background-color: #fc97c4;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner h1 {
+    color: white;
+    font-size: 2.5rem;
+}
+
+.navbar {
+    margin-top: -1px;
+}
+
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.section-title {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+body {
+    background-color: white;
+}
+
+.pink-card {
+    background-color: #FFE4E1; /* 這是一種淺粉紅色，您可以根據需要調整 */
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.img-fluid {
+    border-radius: 10px;
+}
+
+.gradient-background {
+    background: linear-gradient(to right, #cf82ff, #6dbbff);
+}
+
+.navbar {
+    padding: 15px 0;
+}
+
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand {
+    color: #333;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-brand:hover {
+    color: #0056b3;
+}
+
+footer {
+    color: #333;
+}
+
+footer a {
+    color: #0056b3;
+}
+
+footer a:hover {
+    color: #003d82;
+    text-decoration: none;
+}
+
+/* 如果需要調整按鈕顏色以配合新背景 */
+.btn-outline-primary {
+    color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pink-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-link:hover .pink-card {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+    color: #333;
+}
+
+.card-body h5 {
+    color: #0056b3;
+}
+
+.card-body p {
+    color: #666;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pink-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-link:hover .pink-card {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fixed-height-card {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.doctor-image {
+    max-height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-title {
+    margin-bottom: 15px;
+}
+
+.card-body p {
+    flex-grow: 1;
+    overflow-y: auto;
+}

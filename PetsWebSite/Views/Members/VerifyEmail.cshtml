@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "請確認您的電子郵件";
+}
+
+<main class="container wrapper">
+    <div>
+        <h1 class="text-center">請確認您的電子郵件</h1>
+        <p class="text-center">
+            我們已向您輸入的電子郵件地址發送了一封驗證信。請檢查您的收件箱。
+        </p>
+        <div class="text-center mt-4">
+            <!-- 使用 Url.Action 生成動態的登入頁面連結 -->
+            <a href="@Url.Action("Login", "Members")" class="btn btn-primary">返回登入頁面</a>
+        </div>
+    </div>
+</main>

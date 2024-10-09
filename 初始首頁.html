@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貓狗有佳毛孩日記</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/stylesWayne.css" rel="stylesheet">
+    <style>
+        /* 添加或修改以下 CSS */
+        .carousel {
+            position: relative;
+        }
+
+        .carousel-item {
+            height: 500px; /* 根據需要調整高度 */
+        }
+
+        .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+            opacity: 0.7;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .carousel-control-prev {
+            left: 0;
+        }
+
+        .carousel-control-next {
+            right: 0;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .carousel-indicators {
+            bottom: 20px;
+        }
+
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="banner">
+          <img src="img/13.png" alt="" class="left-banner-img" />
+  
+          <h1 class="text-center">貓狗有佳毛孩日記</h1>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light gradient-background py-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="初始首頁.html">貓狗有佳毛孩日記</a>
+                <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                >
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="初始首頁.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">個人中心</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">預約諮詢</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">儲值相關</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <a class="nav-link btn btn-outline-primary me-2" href="Login.html">登入</a>
+                    <span class="navbar-text mx-2">|</span>
+                    <a class="nav-link btn btn-outline-primary" href="signup.html">註冊</a>
+                </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div id="app">
+            <!-- 輪播圖片 -->
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-indicators">
+                    <button v-for="(slide, index) in slides" :key="index" type="button" data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="index" :class="{ active: index === 0 }" :aria-current="index === 0 ? 'true' : 'false'" :aria-label="'Slide ' + (index + 1)"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div v-for="(slide, index) in slides" :key="index" class="carousel-item" :class="{ active: index === 0 }">
+                        <a :href="slide.link">
+                            <img :src="slide.image" class="d-block w-100" :alt="slide.alt">
+                        </a>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <!-- 紀錄寵物的每一刻 -->
+            <div class="container py-5">
+                <div class="card pink-card">
+                    <div class="card-body">
+                        <h2 class="text-center section-title">紀錄寵物的每一刻</h2>
+                        <p class="text-center">在貓狗有佳毛孩日記，我們幫助您記錄寵物生活中的每個精彩時刻。從日常生活到特別的里程碑，我們都為您的寵物提供專業的照護和紀錄服務。讓我們一起創造美好的回憶，見證您與寵物之間的深厚感情。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 獸醫專業 & 流程介紹 -->
+            <div class="container py-5">
+                <div class="row">
+                    <a href="#" class="col-md-6 card-link">
+                        <div class="card pink-card fixed-height-card">
+                            <div class="card-body">
+                                <h2 class="section-title">獸醫專業</h2>
+                                <img src="img/doctor-lg.jpg" class="img-fluid mb-3 doctor-image" alt="貓科專業醫生">
+                                <h5>王大明 獸醫師</h5>
+                                <p>王大明獸醫師擁有超過15年的貓科診療經驗，專精於貓咪行為學和營養學。他致力於為每一隻貓咪提供最適合的醫療照護。</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="col-md-6 card-link">
+                        <div class="card pink-card fixed-height-card">
+                            <div class="card-body">
+                                <h2 class="section-title">流程介紹</h2>
+                                <h5>寵物照護流程</h5>
+                                <p>1. 預約諮詢<br>2. 健康檢查<br>3. 制定照護計劃<br>4. 定期回診<br>5. 線上紀錄追蹤</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="gradient-background text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>關於我們</h5>
+                    <p>貓狗有佳毛孩日記致力於為您的寵物提供最優質的服務。</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>聯絡資訊</h5>
+                    <p>電話：(02) 1234-5678<br>
+                    電子郵件：info@petdiary.com<br>
+                    地址：台北市寵物大道123號</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>關注我們</h5>
+                    <a href="#" class="text-light me-2">Facebook</a>
+                    <a href="#" class="text-light me-2">Instagram</a>
+                    <a href="#" class="text-light">Twitter</a>
+                </div>
+            </div>
+            <hr>
+            <p class="text-center mb-0">&copy; 2023 貓狗有佳毛孩日記. 版權所有.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    new Vue({
+        el: '#app',
+        data: {
+            slides: [
+                { image: 'img/cat-lg-01.jpg', alt: '可愛的貓咪', link: '#' },
+                { image: 'img/dog-lg-01.jpg', alt: '活潑的狗狗', link: '#' },
+                { image: 'img/cat-lg-02.jpg', alt: '寵物和主人', link: '#' }
+            ]
+        },
+        mounted() {
+            // 在 Vue 實例掛載後啟動輪播
+            var myCarousel = document.querySelector('#carouselExampleIndicators')
+            var carousel = new bootstrap.Carousel(myCarousel, {
+                interval: 5000,
+                wrap: true
+            })
+            carousel.cycle()
+        }
+    });
+    </script>
+</body>
+</html>

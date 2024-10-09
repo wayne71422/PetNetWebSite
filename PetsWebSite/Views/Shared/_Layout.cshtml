@@ -1,0 +1,220 @@
+﻿@*Views/Shared/_Layout.cshtml*@ 
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - 貓狗有佳毛孩日記</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
+    <link href="~/css/stylesWayne.css" rel="stylesheet" />
+    <link href="~/css/Layout.css" rel="stylesheet" />
+    <style>
+        .btn-secondary {
+            background-color: transparent;
+            border: none;
+            color: #333;
+        }
+
+            .btn-secondary:hover {
+                background-color: transparent;
+            }
+    </style>
+    @RenderSection("Styles", required: false)
+</head>
+<body class="d-flex flex-column h-100">
+    <div id="app" class="d-flex flex-column h-100">
+        <header>
+            <div class="banner">
+                <img src="/img/13.png" alt="" class="left-banner-img" />
+                <h1 class="text-center">貓狗有佳毛孩日記</h1>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light gradient-background py-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">貓狗有佳毛孩日記</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("BookPage", "Members")">首頁</a>
+                            </li>
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   id="dropdownMenuLink"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    個人中心
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("EditProfile", "Members")">個人檔案</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   id="dropdownMenuLink"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    諮詢服務
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("BookCheck", "BookDate")">諮詢紀錄</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("Book", "BookDate")">預約諮詢</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   id="dropdownMenuLink"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    寵物日誌
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("Album", "Album")">寵物相簿</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("PetList", "PetList")">寵物日常紀錄</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   id="dropdownMenuLink"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    儲值相關
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("DepositPoints", "Deposit")">儲值點數</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("DepositAndConsumptionDetails", "Detail")">儲值&消費明細</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="navbar-nav">
+
+                            <ul class="navbar-nav ml-auto">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">歡迎,  @(Session["MemberName"] != null ? Session["MemberName"].ToString() : "訪客")</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Logout", "Members")">登出</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Login", "Members")">登入</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Register", "Members")">註冊</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="flex-shrink-0">
+
+            @RenderBody()
+        </main>
+
+        <footer class="footer mt-auto py-3 gradient-background text-light">
+            <div class="container" id="footer-app">
+                <footer-content></footer-content>
+                <hr />
+                <p class="text-center mb-0">
+                    &copy; 2024 貓狗有佳毛孩日記. 版權所有.
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    @RenderSection("scripts", required: false)
+    <script>
+        const { createApp } = Vue; // 確保引用的是 Vue 的 createApp 方法
+
+        const FooterContent = {
+            template: `
+                <div class="row">
+                  <div class="col-md-4">
+                    <h5>關於我們</h5>
+                    <p>{{ aboutUs }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h5>聯絡資訊</h5>
+                    <p>電話：{{ contactInfo.phone }}<br>
+                    電子郵件：{{ contactInfo.email }}<br>
+                    地址：{{ contactInfo.address }}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h5>關注我們</h5>
+                    <a v-for="(link, index) in socialLinks" :key="index" :href="link.url" class="text-light me-2">{{ link.name }}</a>
+                  </div>
+                </div>
+              `,
+            setup() {
+                const aboutUs = Vue.ref("貓狗有佳毛孩日記致力於為您的寵物提供最優質的服務。");
+                const contactInfo = Vue.ref({
+                    phone: "(02) 1234-5678",
+                    email: "info@petdiary.com",
+                    address: "台北市寵物大道123號",
+                });
+                const socialLinks = Vue.ref([
+                    { name: "Facebook", url: "#" },
+                    { name: "Instagram", url: "#" },
+                    { name: "Twitter", url: "#" },
+                ]);
+
+                return {
+                    aboutUs,
+                    contactInfo,
+                    socialLinks,
+                };
+            }
+        };
+
+        const footerApp = createApp({
+            components: {
+                'footer-content': FooterContent, // 確保在組件名稱中使用連字符格式
+            }
+        });
+
+        footerApp.mount('#footer-app'); // 確保應用程式掛載在 footer 區域
+    </script>
+
+</body>
+</html>

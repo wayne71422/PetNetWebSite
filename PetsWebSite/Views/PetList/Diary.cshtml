@@ -1,0 +1,160 @@
+﻿@model PetsWebSite.Models.ViewModels.DiaryVm
+@{
+    ViewBag.Title = "Diary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/diary.css" rel="stylesheet" type="text/css" />
+    <style>
+        .btn-back {
+            background-color: #d8caec;
+            padding: 10px 10px;
+            font-size: 16px;
+            border: none;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #bca4df;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="~/Scripts/diary.js"></script>
+}
+
+<div style="position:relative;height:100%">
+    <div class="pageTitleBox">
+        <div class="pageTitle">寵物日常紀錄：</div>
+        <div class="pageTitle">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        <a href="@Url.Action("PetList", "PetList")" class="btn btn-back ms-5">回寵物列表</a>
+    </div>
+    <div class="whole-year-box">
+        @foreach (KeyValuePair<int, Dictionary<int, List<PetsWebSite.Models.Dtos.DiaryDto>>> kvp in Model.Diaries)
+        {
+            <div class="year-box">
+                <div class="year">@kvp.Key.ToString()</div>
+                <div class="arrow-down-y">▼</div>
+            </div>
+            <div class="month-box">
+                @foreach (int month in kvp.Value.Keys)
+                {
+                    <div class="month-title-box">
+                        <div class="month">@month.ToString()月</div>
+                        <div class="arrow-down-m">▼</div>
+                    </div>
+                    foreach (var diary in kvp.Value[month])
+                    {
+                        <div class="container diary-box">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-auto">
+                                    <div class="recordDate text-center">
+                                        <div>@diary.DataDate.Month/@diary.DataDate.Day</div>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="record-box">
+                                        <div class="title">@diary.Title</div>
+                                        @if (diary.Weight > 0)
+                                        {
+                                            <div class="weight">@diary.Weight 公斤</div>
+                                        }
+                                        <div class="content">@diary.Content</div>
+                                        <div class="pics">
+                                            @foreach (var photo in diary.Photos)
+                                            {
+                                                <img src="@Url.Content("~/Uploads/Diaries/" + photo.FileName)" class="img-fluid" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+
+    <!-- 添加新的按鈕 -->
+    <button class="btn btn-primary rounded-circle position-absolute"
+            style="bottom:10px;right:10px"
+            id="addDiaryBtn"
+            data-bs-toggle="modal"
+            data-bs-target="#newDiaryModal">
+        <i class="bi bi-plus"></i>
+    </button>
+
+    <!-- 新日記 Modal -->
+    <div class="modal fade"
+         id="newDiaryModal"
+         tabindex="-1"
+         aria-labelledby="newDiaryModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newDiaryModalLabel">新增日記</h5>
+                    <button type="button"
+                            class="btn-close"
+                            id="closeModalBtn"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Diary", "PetList", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.EditorFor(model => model.PetId, new { htmlAttributes = new { @class = "form-control", @style = "display:none;" } })
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.DataDate, htmlAttributes: new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.DataDate, new { htmlAttributes = new { @class = "form-control" }, type = "date" })
+                            @Html.ValidationMessageFor(model => model.DataDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "form-label" })
+                            @Html.DropDownListFor(model => model.Title, Model.TitleItems, "請選擇種類", new { @class = "form-control", @id = "newTitle" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "form-label" })
+                            @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3 justify-content-start " style="display:none;" id="newWeightBox">
+                            <div class="mb-3">
+                                @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "form-label" })
+                                <div class="row align-items-center left-align">
+                                    <div class="col-8">
+                                        @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-4">
+                                        <label>公斤</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.UploadPhotos, htmlAttributes: new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.UploadPhotos, new { htmlAttributes = new { @class = "form-control" }, type = "file", multiple = "multiple" })
+                            @Html.ValidationMessageFor(model => model.UploadPhotos, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"
+                                    class="btn btn-back"
+                                    data-bs-dismiss="modal">
+                                取消
+                            </button>
+                            <input type="submit" value="保存" class="btn btn-back" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
