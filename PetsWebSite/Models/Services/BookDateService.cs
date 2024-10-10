@@ -180,10 +180,10 @@ namespace PetsWebSite.Models.Services
             } 
         }
 
-        internal BookRecord GetBookRecordById(int id)
-        {
-            return _bookDateDao.GetBookingById(id);
-        }
+        //internal BookRecord GetBookRecordById(int id)
+        //{
+        //    return _bookDateDao.GetBookingById(id);
+        //}
 
         internal BookDateRecordDto GetBookRecord(int id)
         {
@@ -240,6 +240,14 @@ namespace PetsWebSite.Models.Services
 			{
 				return Result.Fail(ex.Message);
 			}
+		}
+
+		internal Member GetMember(string name)
+		{
+			if (name == null) throw new Exception("帳號為空，尚未登入，請重新登入");
+            if (name.Length == 0) throw new Exception("帳號為空，尚未登入，請重新登入");
+            if (name == "") throw new Exception("帳號為空，尚未登入，請重新登入");
+            return _MemberRepo.GetMemberByAccount(name);
 		}
 	}
 }

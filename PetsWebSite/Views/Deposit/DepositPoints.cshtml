@@ -113,6 +113,7 @@
             success: function (response) {
                 if (response.success) {
                     alert("購買成功！餘額已更新。");
+                    window.location.reload();
                 } else {
                     alert("儲值失敗：" + response.message);
                 }

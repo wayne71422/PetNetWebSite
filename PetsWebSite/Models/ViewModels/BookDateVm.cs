@@ -18,5 +18,7 @@ namespace PetsWebSite.Models.ViewModels
 
         public int TimeSlotId { get; set; }
         //public IEnumerable<SelectListItem> AvailableTimeSlots { get; set; }  // 可預約時間下拉選單
+
+        public string PetName { get; set; }
     }
 }

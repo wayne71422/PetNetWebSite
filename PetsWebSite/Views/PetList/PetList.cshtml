@@ -7,7 +7,7 @@
 
 @section styles{
     <link href="~/css/petList.css" rel="stylesheet" />
-    
+
     <style>
         .btn-secondary {
             background-color: transparent;
@@ -22,7 +22,7 @@
 }
 
 <div class="container">
-    
+
     <div>
         <a href="@Url.Action("CreatePet", "PetList")" class="btn btn-primary">新增</a>
 
@@ -71,7 +71,7 @@
                             <div class="btns">
                                 <a href="@Url.Action("EditPet", "PetList", new {petId = pet.Id})" class="btn btn-primary">編輯</a>
                                 <a href="@Url.Action("Diary", "PetList", new {petId = pet.Id})" class="btn btn-primary">活動日記</a>
-                                <a href="@Url.Action("Book", "BookDate")" class="btn btn-primary">預約諮詢</a>
+                                <a href="@Url.Action("Book", "BookDate",new {petId = pet.Id})" class="btn btn-primary book">預約諮詢</a>
                             </div>
                         </div>
                     </div>
@@ -84,4 +84,37 @@
 
 @section scripts{
     <script src="~/Scripts/petList.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 當點擊預約諮詢時
+            $('.book').on('click', function(event) {
+                event.preventDefault(); // 防止默認的跳轉行為
+
+                var petId = $(this).attr('href').split('=').pop(); // 獲取 petId
+
+                // AJAX 請求以獲取 AccountBalance
+                $.ajax({
+                    url: '@Url.Action("GetAccountBalance", "BookDate")', // 替換成你的控制器和方法
+                    method: 'GET',
+                    success: function(data) {
+                        if (data.accountBalance < 200) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "預約失敗",
+                                text: "餘額不足，請前往儲值", 
+                            }).then(() => {
+                                window.location.href = '@Url.Action("DepositPoints", "Deposit")';
+                            });
+                        } else {
+                            // 如果餘額足夠，進行跳轉
+                            window.location.href = '@Url.Action("Book", "BookDate", new { petId = "__PET_ID__" })'.replace('__PET_ID__', petId);
+                        }
+                    },
+                    error: function() {
+                        alert("無法獲取帳戶餘額，請稍後再試。");
+                    }
+                });
+            });
+        });
+    </script>
 }

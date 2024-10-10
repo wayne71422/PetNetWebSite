@@ -28,14 +28,28 @@ namespace PetsWebSite.Controllers
         }
 
         [Authorize]
-        public ActionResult Book()
-        {
+		public ActionResult Book(int petId = 0)
+		{
+			var model = new BookDateVm();
+            var member = _bookDateService.GetMember(User.Identity.Name).AccountBalance;
+            if(member < 200)
+			{
+                return RedirectToAction("DepositPoints", "Deposit");
+			}
+			// 根據 petId 從資料庫取得對應的寵物名稱
+			if (petId != 0)
+			{
+				var _petService = new PetService();
+				var pet = _petService.GetPetsByPetId(petId); // 假設有個 service 取得寵物資訊
+				model.PetId = petId;
+				model.PetName = pet.Name;
+			}
 
-            return View();
-        }
+			return View(model);
+		}
 
 
-        public JsonResult GetPets()
+		public JsonResult GetPets()
         {
             var pets = _bookDateService.GetPetsByMember(User.Identity.Name)
                 .Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name })
@@ -260,6 +274,13 @@ namespace PetsWebSite.Controllers
             }
             return RedirectToAction("BookCheck");
         }
-    }
+
+		[Authorize]
+		public ActionResult GetAccountBalance()
+		{
+			var member = _bookDateService.GetMember(User.Identity.Name);
+			return Json(new { accountBalance = member.AccountBalance }, JsonRequestBehavior.AllowGet);
+		}
+	}
 
 }

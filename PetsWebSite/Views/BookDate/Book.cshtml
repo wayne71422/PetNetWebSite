@@ -31,10 +31,18 @@
                 <div class="mb-3">
                     <label for="PetId">寵物名稱</label>
                     <select v-model="selectedPet" class="form-control">
-                        <option value="">請選擇寵物</option>
-                        <option v-for="pet in pets" :key="pet.Value" :value="pet.Value">
-                            {{ pet.Text }}
-                        </option>
+                        @if (Model.PetId != 0)
+                        {
+                            <option value="@Model.PetId" selected>@Model.PetName</option>
+                        }
+                        else
+                        {
+                            <option value="">請選擇寵物</option>
+                            <option v-for="pet in pets" :key="pet.Value" :value="pet.Value">
+                                {{ pet.Text }}
+                            </option>
+                        }
+                        @if (Model.PetId == 0) { ViewData.ModelState.AddModelError("PetId", "請選擇寵物"); }
                     </select>
                 </div>
 
@@ -83,117 +91,7 @@
 
 <script src="https://unpkg.com/vue@3"></script>
 <script>
-    @*const app = Vue.createApp({
 
-    data() {
-        return {
-            selectedPet: '',            // 目前選擇的寵物 ID
-            selectedDoctor: '',         // 目前選擇的醫生 ID
-            selectedDate: '',           // 目前選擇的日期
-            selectedTimeSlot: '',       // 目前選擇的時段 ID
-            pets: [],                   // 寵物列表
-            doctors: [],                // 醫生列表
-            availableDates: [],         // 可用的日期列表
-            availableTimeSlots: []      // 可用的時段列表
-        };
-
-    },
-    mounted() {
-        this.fetchDoctors();
-        this.fetchPets();
-        /*initializeJQueryFunctions();*/
-    },
-
-    methods: {
-        fetchDoctors() {
-            fetch('@Url.Action("GetDoctors", "BookDate")')
-                .then(response => response.json())
-                .then(data => {
-                    this.doctors = data.doctors;
-                })
-                .catch(error => {
-                    console.error('Error fetching doctors:', error);
-                });
-        },
-        fetchPets() {
-            fetch('@Url.Action("GetPets", "BookDate")')
-                .then(response => response.json())
-                .then(data => {
-                    this.pets = data.pets;
-                })
-                .catch(error => {
-                    console.error('Error fetching pets:', error);
-                });
-        },
-        fetchAvailableDates() {
-            if (this.selectedDoctor) {
-                fetch('@Url.Action("GetAvailableDates", "BookDate")?doctorId=' + this.selectedDoctor)
-                    .then(response => response.json())
-                    .then(data => {
-                        this.availableDates = data.availableDates;
-                        this.selectedDate = '';
-                        this.availableTimeSlots = [];
-                    })
-                    .catch(error => {
-                        console.error('Error fetching available dates:', error);
-                    });
-            } else {
-                this.availableDates = [];
-                this.availableTimeSlots = [];
-            }
-        },
-        fetchAvailableTimeSlots() {
-            if (this.selectedDoctor && this.selectedDate) {
-                fetch('@Url.Action("GetAvailableTimeSlots", "BookDate")?doctorId=' + this.selectedDoctor + '&selectedDate=' + this.selectedDate)
-                    .then(response => response.json())
-                    .then(data => {
-                        this.availableTimeSlots = data.availableTimeSlots;
-                        this.selectedTimeSlot = '';
-                    })
-                    .catch(error => {
-                        console.error('Error fetching available time slots:', error);
-                    });
-            } else {
-                this.availableTimeSlots = [];
-            }
-        },
-        submitBooking() {
-            if (this.selectedDoctor && this.selectedDate && this.selectedTimeSlot) {
-                const bookingData = {
-                    petId: this.selectedPet,
-                    doctorId: this.selectedDoctor,
-                    selectedDate: this.selectedDate,
-                    timeSlotId: this.selectedTimeSlot
-                };
-
-                fetch('@Url.Action("SubmitBooking", "BookDate")', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(bookingData)
-                })
-                .then(response => response.json())  // 解析返回的 JSON
-                .then(data => {
-                    if (data.success) {
-                        alert('預約成功');
-                        window.location.href = '@Url.Action("BookCheck", "BookDate")';
-                    } else {
-                        alert('預約失敗: ' + data.message);  // 顯示簡單的錯誤訊息
-                    }
-                })
-                .catch(error => {
-                    console.error('Error submitting booking:', error);
-                });
-            } else {
-                alert('請先選擇寵物、醫生、日期和時段');
-            }
-        }
-    }
-});
-
-
-app.mount('#app');*@
     const app = Vue.createApp({
         setup() {
             const selectedPet = Vue.ref('');            // 目前選擇的寵物 ID
@@ -282,23 +180,65 @@ app.mount('#app');*@
 
                         const data = await response.json();
                         if (data.success) {
-                            alert('預約成功');
-                            window.location.href = '@Url.Action("BookCheck", "BookDate")';
+                            @*alert('預約成功');
+                            window.location.href = '@Url.Action("BookCheck", "BookDate")';*@
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "預約成功，即將跳轉",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location.href = '@Url.Action("BookCheck", "BookDate")';
+                            });
                         } else {
-                            alert('預約失敗: ' + data.message);
+                            Swal.fire({
+                                icon: "error",
+                                title: "預約失敗",
+                                text: "餘額不足，請前往儲值",
+                            })
+                            //swal({
+                            //    title: "錯誤",
+                            //    text: "預約失敗: " + data.message,
+                            //    icon: "warning",
+                            //    button: "確認",
+                            //})
+                            .then(() => {
+                                window.location.href = '@Url.Action("DepositPoints", "Deposit")';
+                            });
+                            @*alert('預約失敗: ' + data.message);
+                            // 跳轉到指定頁面，例如錯誤頁面
+                            window.location.href ='@Url.Action("DepositPoints", "Deposit")';*@
                         }
                     } catch (error) {
                         console.error('Error submitting booking:', error);
                     }
                 } else {
-                    alert('請先選擇寵物、醫生、日期和時段');
+                    Swal.fire({
+                        icon: "error",
+                        title: "錯誤:" + data.message,
+                        text: "請先選擇寵物、醫生、日期和時段",
+                    });
+                    //swal({
+                    //    title: "錯誤",
+                    //    text: "請先選擇寵物、醫生、日期和時段",
+                    //    icon: "warning",
+                    //    button: "確認",
+                    //})
+                    /*alert('請先選擇寵物、醫生、日期和時段');*/
                 }
             };
 
             // On component mount
             Vue.onMounted(() => {
                 fetchDoctors();
-                fetchPets();
+
+                if (@Model.PetId != 0) {
+                    selectedPet.value = "@Model.PetId"; // 初始化 selectedPet 為傳入的 PetId
+                }
+                else {
+                    fetchPets();
+                }
             });
 
             return {
